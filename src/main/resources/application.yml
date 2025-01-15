@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/test-wallet}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:P4ssword!}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 20
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: true
+  docker:
+    compose:
+      lifecycle-management: start-only
+#error:
+#  handling:
+#    http-status-in-json-response: true
+#    exception-logging: NO_LOGGING
+#    full-stacktrace-http-statuses: 5xx
+#    log-levels:
+#      5xx: ERROR
+springdoc:
+  pathsToMatch: /
