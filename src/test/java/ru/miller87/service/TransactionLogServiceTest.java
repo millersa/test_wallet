@@ -27,7 +27,7 @@ public class TransactionLogServiceTest {
         walletEntity.setBalance(100L);
         OperationType operationType = OperationType.DEPOSIT;
 
-        transactionLogService.save(walletEntity, operationType);
+        transactionLogService.save(walletEntity, operationType, 100L);
 
         verify(transactionLogRepository, times(1)).save(any(TransactionLogEntity.class));
     }

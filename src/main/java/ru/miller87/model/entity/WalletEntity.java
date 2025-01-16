@@ -11,6 +11,7 @@ import java.util.UUID;
 public class WalletEntity {
     @Id
     @GeneratedValue
+    @Column(name = "wallet_id")
     private UUID walletId;
     @Column(nullable = false)
     private Long balance = 0L;

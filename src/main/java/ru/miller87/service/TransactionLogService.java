@@ -20,12 +20,13 @@ public class TransactionLogService {
      *
      * @param walletEntity  объект кошелька, с которым была произведена операция
      * @param operationType тип операции, которая была произведена
+     * @param amount        сумма операции
      */
-    public void save(WalletEntity walletEntity, OperationType operationType) {
+    public void save(WalletEntity walletEntity, OperationType operationType, Long amount) {
         var transactionLogEntity = new TransactionLogEntity();
         transactionLogEntity.setWallet(walletEntity);
         transactionLogEntity.setOperationType(operationType);
-        transactionLogEntity.setAmount(walletEntity.getBalance());
+        transactionLogEntity.setAmount(amount);
         transactionLogRepository.save(transactionLogEntity);
     }
 }

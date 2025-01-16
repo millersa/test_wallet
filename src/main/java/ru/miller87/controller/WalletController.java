@@ -1,5 +1,6 @@
 package ru.miller87.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1")
 public class WalletController {
     private final WalletService walletService;
+
     /**
      * Обновляет баланс кошелька
      *
@@ -24,7 +26,7 @@ public class WalletController {
      * @return сообщение об успешном обновлении баланса
      */
     @PostMapping("/wallet")
-    public ResponseEntity<?> updateWallet(@RequestBody WalletRequestDto walletRequestDto) {
+    public ResponseEntity<?> updateWallet(@Valid @RequestBody WalletRequestDto walletRequestDto) {
         walletService.updateWallet(walletRequestDto);
         return ResponseEntity.ok("Операция выполнена успешно");
     }
@@ -35,8 +37,8 @@ public class WalletController {
      * @param walletId уникальный идентификатор кошелька
      * @return текущий баланс кошелька
      */
-    @GetMapping("/wallets/{WALLET_UUID}")
+    @GetMapping("/wallets/{walletId}")
     public Long getWallet(@PathVariable UUID walletId) {
-       return walletService.getWallet(walletId);
+        return walletService.getWallet(walletId);
     }
 }

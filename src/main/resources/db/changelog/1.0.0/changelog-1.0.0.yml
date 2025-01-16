@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: 0001_create_wallet_table.sql
+      relativeToChangeLogFile: true
+  - include:
+      file: 0002_create_transaction_log_table.sql
+      relativeToChangeLogFile: true
+  - include:
+      file: 0003_insert_value_to_wallet_table.sql
+      relativeToChangeLogFile: true

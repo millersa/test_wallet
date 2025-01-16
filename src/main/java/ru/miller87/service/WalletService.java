@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
 @Slf4j
 public class WalletService {
     private final WalletRepository walletRepository;
@@ -39,6 +38,7 @@ public class WalletService {
      *
      * @param walletRequestDto объект, содержащий данные о кошельке
      */
+    @Transactional
     public void updateWallet(WalletRequestDto walletRequestDto) {
         if (log.isDebugEnabled()) {
             log.debug("Method updateWallet with parameters: walletRequestDto {} ", walletRequestDto);
@@ -53,7 +53,6 @@ public class WalletService {
             walletEntity.setBalance(walletEntity.getBalance() - walletRequestDto.getAmount());
         }
         walletRepository.save(walletEntity);
-        transactionLogService.save(walletEntity, walletRequestDto.getOperationType());
+        transactionLogService.save(walletEntity, walletRequestDto.getOperationType(), walletRequestDto.getAmount());
     }
-
 }

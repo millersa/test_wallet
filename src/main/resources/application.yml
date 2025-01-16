@@ -3,9 +3,10 @@ spring:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/test-wallet}
     username: ${JDBC_DATABASE_USERNAME:postgres}
     password: ${JDBC_DATABASE_PASSWORD:P4ssword!}
+    driver-class-name: org.postgresql.Driver
     hikari:
-      connection-timeout: 30000
-      maximum-pool-size: 20
+      connection-timeout: 600000
+      maximum-pool-size: 32
   jpa:
     hibernate:
       ddl-auto: none
@@ -14,15 +15,11 @@ spring:
       hibernate:
         id:
           new_generator_mappings: true
-  docker:
-    compose:
-      lifecycle-management: start-only
-#error:
-#  handling:
-#    http-status-in-json-response: true
-#    exception-logging: NO_LOGGING
-#    full-stacktrace-http-statuses: 5xx
-#    log-levels:
-#      5xx: ERROR
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.yml
+    contexts:
+      - dev
+      - test
 springdoc:
-  pathsToMatch: /
+  swagger-ui.path: /swagger-ui.html

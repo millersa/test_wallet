@@ -15,7 +15,7 @@ public class TransactionLogEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "walled_id", nullable = false)
+    @JoinColumn(name = "walletId", nullable = false)
     private WalletEntity wallet;
 
     @Enumerated(EnumType.STRING)
